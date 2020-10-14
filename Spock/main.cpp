@@ -18,7 +18,7 @@
 #include "Graphics/VKRotatingObject.h"
 #include "Utilities/HashTable.h"
 
-#include "ShaderPack.h"
+#include "ShaderPack_Public.h"
 
 #include <vulkan/vulkan.h>
 #include <vulkan/vk_sdk_platform.h>

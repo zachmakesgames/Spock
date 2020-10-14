@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{D5DDEBC8-CDFC-47D9-AE35-7283EE1B5498}</ProjectGuid>
-    <RootNamespace>Spock</RootNamespace>
+    <ProjectGuid>{C1A9054C-6167-45D0-B793-C1D661C507EE}</ProjectGuid>
+    <RootNamespace>ColdStorage</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -69,10 +69,11 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)Tools</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -81,6 +82,21 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)ShaderPack;$(SolutionDir)ThirdParty/VULKAN/Include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/VULKAN/Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -91,21 +107,6 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/GLFW/include;$(SolutionDir)ThirdParty/GLM/;$(SolutionDir)ThirdParty/VULKAN/Include;$(SolutionDir)ShaderPack;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/GLFW/lib-vc2019;$(SolutionDir)ThirdParty/VULKAN/Lib;$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>vulkan-1.lib;glfw3.lib;ShaderPack.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -141,33 +142,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Graphics\inc\Buffer.h" />
-    <ClInclude Include="Graphics\inc\DescriptorSet.h" />
-    <ClInclude Include="Graphics\inc\Device.h" />
-    <ClInclude Include="Graphics\inc\Instance.h" />
-    <ClInclude Include="Graphics\inc\MemLoader.h" />
-    <ClInclude Include="Graphics\inc\Mesh.h" />
-    <ClInclude Include="Graphics\inc\Pipeline.h" />
-    <ClInclude Include="Graphics\inc\Shader.h" />
-    <ClInclude Include="Graphics\inc\View.h" />
-    <ClInclude Include="Graphics\IRenderable.h" />
-    <ClInclude Include="Graphics\IRenderAgent.h" />
-    <ClInclude Include="Graphics\VKRenderable.h" />
-    <ClInclude Include="Graphics\VKRenderAgent.h" />
-    <ClInclude Include="Graphics\VKRotatingObject.h" />
-    <ClInclude Include="Utilities\HashTable.h" />
+    <ClCompile Include="ColdStorage.cpp" />
+    <ClCompile Include="Flags.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Graphics\src\Buffer.cpp" />
-    <ClCompile Include="Graphics\src\DescriptorSet.cpp" />
-    <ClCompile Include="Graphics\src\Device.cpp" />
-    <ClCompile Include="Graphics\src\Instance.cpp" />
-    <ClCompile Include="Graphics\src\MemLoader.cpp" />
-    <ClCompile Include="Graphics\src\Mesh.cpp" />
-    <ClCompile Include="Graphics\src\Pipeline.cpp" />
-    <ClCompile Include="Graphics\src\Shader.cpp" />
-    <ClCompile Include="Graphics\src\View.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClInclude Include="Flags.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ShaderPack\ShaderPack.vcxproj">
