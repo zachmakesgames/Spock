@@ -4,7 +4,7 @@ It wraps up the Vulkan API in bite sized and easy to use classes that make const
 
 Spock uses The GL Math Library (GLM) for vectors and matrices and GLFW to handle the creation of windows and display surfaces.
 
-##Repository Layout
+## Repository Layout
 This respository is layed out in a way that separates each component of the project.
 The primary components of Spock are:
 * Spock - API wrapper and demonstration
@@ -16,17 +16,17 @@ The primary components of Spock are:
 	* Vulkan - Graphics library
 * Tools - Useful tools like glslangvalidator.exe and ColdStorage.exe
 
-##Project Dependencies
+## Project Dependencies
 Each project in the solution already has all of its dependencies set up so there should be no need to edit additional
 includes or libraries. However should the need arise below is the dependency list for each project.
 
-###Spock Dependencies
+### Spock Dependencies
 * Vulkan
 * GLFW
 * GLM
 * ShaderPack
 
-###ShaderPack Dependencies
+### ShaderPack Dependencies
 * Vulkan
 * ~~GLM~~ GLM was originally included but is no longer necessary
 
@@ -35,7 +35,7 @@ includes or libraries. However should the need arise below is the dependency lis
 	* Vulkan (I haven't found a clever way to mask this dependency yet)
 
 
-##Compiling Shaders
+## Compiling Shaders
 Since Spock makes use of ShaderPacks for easy loading of shaders the ColdStorage tool is required at the moment
 until a raw Shader class is created or becomes necessary. This tool and the ShaderPack library are a work in progress
 so things may not always work as expected.
