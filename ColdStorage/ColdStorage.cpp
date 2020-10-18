@@ -569,7 +569,7 @@ void DoCommandFile(std::vector<std::string> args) {
 	//But later on it would be cool to add a flag for vulkan or opengl
 	std::string command = "glslangvalidator.exe -V " + args[0] + " " + typeOverride + " " + outputOverride + " " + includeDir;
 	
-	std::cout << "Trying to run the command glslangvalidator.exe " + command + "\n";
+	//std::cout << "Trying to run the command glslangvalidator.exe " + command + "\n";
 	//ShellExecuteA(NULL, "open", "glslangvalidator.exe", command.c_str(), 0, SW_SHOW);
 
 
@@ -634,12 +634,12 @@ void DoCommandFiles(std::vector<std::string> args) {
 
 
 	//check for include directory override flag
-	/*if (flags.HasFlag(FlagType::FT_INCLUDE)) {
+	if (flags.HasFlag(FlagType::FT_INCLUDE)) {
 
 		//Again not checking this for anything so good luck end user!
 		includeDir = std::string(flags.GetFlag(FlagType::FT_INCLUDE).text);
 		includeDir = "-I " + includeDir;
-	}*/
+	}
 
 	//check for nopack flag
 	if (flags.HasFlag(FlagType::FT_NOPACK)) {
@@ -677,11 +677,15 @@ void DoCommandFiles(std::vector<std::string> args) {
 
 	for (int i = 0; i < fileCount; ++i) {
 		std::string extension = args[i].substr(args[i].find_last_of(".") + 1);
+		std::string glsloutput = "";
 		if (outputOverride != "") {
-			outputOverride = "-o " + outputOverride + "." + extension + ".spv";
+			glsloutput = "-o " + outputOverride + "." + extension + ".spv";
 		}
 
-		commands[i] = "glslangvalidator.exe -V " + args[i] + " " + outputOverride;
+		commands[i] = "glslangvalidator.exe -V " + args[i] + " " + glsloutput + " " + includeDir;
+#ifdef DEBUG
+		std::cout << "Spawning process with command: " << commands[i] << std::endl;
+#endif
 		infos[i] = SpawnProcess(commands[i]);
 	}
 	//Building this specifically for vulkan right now so going to hardcode in the -V
@@ -703,22 +707,6 @@ void DoCommandFiles(std::vector<std::string> args) {
 	char buff[1024];
 
 
-	//I really hate having a while(true) but it seems to be the best way to do it
-	/*while (true) {
-
-		//We need to clear out the buffer every loop otherwise we'll get some duplicate data
-		memset(buff, 0, 1024);
-		BOOL readOk = FALSE;
-
-		//Try to read in some data from the handle
-		readOk = ReadFile(info.OutputHandle, buff, 1024, &readBytes, NULL);
-		//when the read fails or we have no bytes left we can exit
-		if (!readOk || readBytes == 0) break;
-
-		//Print the read bytes to the screen
-		std::cout << buff;
-	}*/
-
 	for (int i = 0; i < fileCount; ++i) {
 		readBytes = 0;
 		while (true) {
@@ -731,7 +719,7 @@ void DoCommandFiles(std::vector<std::string> args) {
 		DWORD exit_value;
 
 		GetExitCodeProcess(infos[i].pInfo.hProcess, &exit_value);
-		std::wcout << "Process " << i << " exited with code " << exit_value << "\n";
+		//std::wcout << "Process " << i << " exited with code " << exit_value << "\n";
 
 		
 
@@ -741,23 +729,13 @@ void DoCommandFiles(std::vector<std::string> args) {
 		CloseHandle(infos[i].pInfo.hThread);
 		CloseHandle(infos[i].OutputHandle);
 	}
-	//WaitForSingleObject(info.pInfo.hProcess, INFINITE);
-	//DWORD exit_value;
 
-	//GetExitCodeProcess(info.pInfo.hProcess, &exit_value);
-
-	//std::cout << "Process exited with code: " << exit_value << "\n";
-
-	//CloseHandle(info.pInfo.hProcess);
-	//CloseHandle(info.pInfo.hThread);
-	//Then don't forget to close the handle
-	//CloseHandle(info.OutputHandle);
 
 	if (!noPack) {
 		//pack up the file
 
 		//Get the stages
-		
+
 
 
 		ShaderPack pack;
@@ -771,10 +749,10 @@ void DoCommandFiles(std::vector<std::string> args) {
 
 
 		if (vertStage != "") {
-			
+
 			vertLayout = pack.ParseGLSL(vertStage);
 
-			std::ifstream instream("vert.spv", std::ios::binary | std::ios::ate);
+			std::ifstream instream(outputOverride == "" ? "vert.spv" : outputOverride + ".vert.spv", std::ios::binary | std::ios::ate);
 			if (!instream.is_open()) {
 				std::cout << "Failed to open file for deserialization\n";
 				return;
@@ -789,13 +767,13 @@ void DoCommandFiles(std::vector<std::string> args) {
 
 
 			pack.AddStage(code, size, vertLayout, LayoutStage::LAYOUT_VERTEX);
-			
+
 		}
 		if (tescStage != "") {
 
 			tescLayout = pack.ParseGLSL(tescStage);
 
-			std::ifstream instream("tesc.spv", std::ios::binary | std::ios::ate);
+			std::ifstream instream(outputOverride == "" ? "tesc.spv" : outputOverride + ".tesc.spv", std::ios::binary | std::ios::ate);
 			if (!instream.is_open()) {
 				std::cout << "Failed to open file for deserialization\n";
 				return;
@@ -813,7 +791,7 @@ void DoCommandFiles(std::vector<std::string> args) {
 		if (teseStage != "") {
 			teseLayout = pack.ParseGLSL(teseStage);
 
-			std::ifstream instream("tese.spv", std::ios::binary | std::ios::ate);
+			std::ifstream instream(outputOverride == "" ? "tese.spv" : outputOverride + ".tese.spv", std::ios::binary | std::ios::ate);
 			if (!instream.is_open()) {
 				std::cout << "Failed to open file for deserialization\n";
 				return;
@@ -832,7 +810,7 @@ void DoCommandFiles(std::vector<std::string> args) {
 		if (geomStage != "") {
 			geomLayout = pack.ParseGLSL(geomStage);
 
-			std::ifstream instream("geom.spv", std::ios::binary | std::ios::ate);
+			std::ifstream instream(outputOverride == "" ? "geom.spv" : outputOverride + ".geom.spv", std::ios::binary | std::ios::ate);
 			if (!instream.is_open()) {
 				std::cout << "Failed to open file for deserialization\n";
 				return;
@@ -851,7 +829,7 @@ void DoCommandFiles(std::vector<std::string> args) {
 		if (fragStage != "") {
 			fragLayout = pack.ParseGLSL(fragStage);
 
-			std::ifstream instream("frag.spv", std::ios::binary | std::ios::ate);
+			std::ifstream instream(outputOverride == "" ? "frag.spv" : outputOverride + ".frag.spv", std::ios::binary | std::ios::ate);
 			if (!instream.is_open()) {
 				std::cout << "Failed to open file for deserialization\n";
 				return;
@@ -869,7 +847,7 @@ void DoCommandFiles(std::vector<std::string> args) {
 		if (compStage != "") {
 			compLayout = pack.ParseGLSL(compStage);
 
-			std::ifstream instream("comp.spv", std::ios::binary | std::ios::ate);
+			std::ifstream instream(outputOverride == "" ? "comp.spv" : outputOverride + ".comp.spv", std::ios::binary | std::ios::ate);
 			if (!instream.is_open()) {
 				std::cout << "Failed to open file for deserialization\n";
 				return;
@@ -884,10 +862,18 @@ void DoCommandFiles(std::vector<std::string> args) {
 
 			pack.AddStage(code, size, fragLayout, LayoutStage::LAYOUT_COMPUTE);
 		}
-	
-		pack.Serialize("TestPack-6-16.sp");
 
-}
+
+
+		if (outputOverride != "") {
+			pack.Serialize(outputOverride + ".sp");
+		}
+		else
+		{
+			pack.Serialize("ShaderPack.sp");
+		}
+
+	}
 }
 
 
