@@ -21,9 +21,15 @@
     <ClCompile Include="Flags.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FileProcessing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Flags.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileProcessing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

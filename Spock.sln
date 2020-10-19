@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShaderPack", "ShaderPack\Sh
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ColdStorage", "ColdStorage\ColdStorage.vcxproj", "{C1A9054C-6167-45D0-B793-C1D661C507EE}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ColdStorageUnitTesting", "ColdStorageUnitTesting\ColdStorageUnitTesting.vcxproj", "{2F1B51B9-EB27-439A-96C0-6B69F8334763}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{C1A9054C-6167-45D0-B793-C1D661C507EE}.Release|x64.Build.0 = Release|x64
 		{C1A9054C-6167-45D0-B793-C1D661C507EE}.Release|x86.ActiveCfg = Release|Win32
 		{C1A9054C-6167-45D0-B793-C1D661C507EE}.Release|x86.Build.0 = Release|Win32
+		{2F1B51B9-EB27-439A-96C0-6B69F8334763}.Debug|x64.ActiveCfg = Debug|x64
+		{2F1B51B9-EB27-439A-96C0-6B69F8334763}.Debug|x64.Build.0 = Debug|x64
+		{2F1B51B9-EB27-439A-96C0-6B69F8334763}.Debug|x86.ActiveCfg = Debug|Win32
+		{2F1B51B9-EB27-439A-96C0-6B69F8334763}.Debug|x86.Build.0 = Debug|Win32
+		{2F1B51B9-EB27-439A-96C0-6B69F8334763}.Release|x64.ActiveCfg = Release|x64
+		{2F1B51B9-EB27-439A-96C0-6B69F8334763}.Release|x64.Build.0 = Release|x64
+		{2F1B51B9-EB27-439A-96C0-6B69F8334763}.Release|x86.ActiveCfg = Release|Win32
+		{2F1B51B9-EB27-439A-96C0-6B69F8334763}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

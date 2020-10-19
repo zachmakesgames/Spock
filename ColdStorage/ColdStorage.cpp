@@ -7,8 +7,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
-
-#include "Flags.h"
+#include <filesystem>
 
 
 //Stuff for creating the child processes
@@ -18,9 +17,8 @@
 #include <strsafe.h>
 
 #include "ShaderPack_Public.h"
+#include "FileProcessing.h"
 
-///Defines
-#define DEBUG
 
 //Usage Syntax info below
 
@@ -93,15 +91,15 @@ typedef struct Command {
 									//If requiredArgumentCount is negative then it is a minimum value, meaning it requires >= requiredArgumentCount args
 }Command;
 
-
-typedef struct ProcessInfo {
+FileProcessor processor;
+/*typedef struct ProcessInfo {
 	HANDLE OutputHandle;
 	PROCESS_INFORMATION pInfo;
-};
+};*/
 
 
 ///Global variables
-Flags flags;
+//Flags flags;
 
 //A cheap and easy way to register commands
 Command validCommands[] = { 
@@ -125,13 +123,14 @@ bool IsFlag(char* testFlag, FlagType* outType);
 char** GetFlags(int count, char** arguments);
 
 
-
+/*void ProcessDirectory(std::string path);
 void DoCommandDir(std::vector<std::string> args);
 void DoCommandFile(std::vector<std::string> args);
 void DoCommandFiles(std::vector<std::string> args);
 
 //HANDLE SpawnProcess(std::string command);
 struct ProcessInfo SpawnProcess(std::string command);
+*/
 
 void PrintSyntax();
 
@@ -143,7 +142,7 @@ void PrintSyntax();
 int main(int argc, char** argv)
 {
 	std::cout << "ColdStorage bulk shader packing tool.\n";
-#ifdef DEBUG
+#ifdef _DEBUG
 	std::cout << "There are " << sizeof(validCommands)/sizeof(Command) << " commands registered\n";
 #endif
 
@@ -165,7 +164,7 @@ int main(int argc, char** argv)
 		PrintSyntax();
 		return -1;
 	}
-	std::cout << "Called with " << flags.Count() << " flags\n";
+	std::cout << "Called with " << processor.flags.Count() << " flags\n";
 
 	//Make sure that arguments is not null because we need it later on
 	if (arguments == nullptr) {
@@ -232,15 +231,15 @@ void HandleCommand(int argCount, char** arguments) {
 	}
 
 	if (command == "dir") {
-		DoCommandDir(args);
+		processor.DoCommandDir(args);
 	}
 
 	if (command == "file") {
-		DoCommandFile(args);
+		processor.DoCommandFile(args);
 	}
 
 	if (command == "files"){
-		DoCommandFiles(args);
+		processor.DoCommandFiles(args);
 	}
 }
 
@@ -372,6 +371,8 @@ bool IsFlag(char* testFlag, FlagType* outType) {
 				break;
 			case 'd': if (outType != nullptr) *outType = FlagType::FT_INCLUDE;
 				break;
+			case 'r': if (outType != nullptr) *outType = FlagType::FT_RECURSE;
+				break;
 			default: return false;	//Don't need a break because it would never be reached
 			}
 		}
@@ -420,7 +421,7 @@ char** GetFlags(int count, char** arguments) {
 			//These types do not require arguments and can be used on their own
 			if (testType == FlagType::FT_NOPACK || testType == FlagType::FT_VERIFY) {
 				Flag f = { testType, "" };
-				flags.AddFlag(f);		//We also dont need to check the output of this because we dont care about duplicate flags with no arguments
+				processor.flags.AddFlag(f);		//We also dont need to check the output of this because we dont care about duplicate flags with no arguments
 			}
 
 			//All other types require a following argument so we need to verify that the next argument exists
@@ -443,7 +444,7 @@ char** GetFlags(int count, char** arguments) {
 						f.t = testType;
 						strcpy_s(f.text, arguments[nextIndex]);
 
-						if (!flags.AddFlag(f)){	
+						if (!processor.flags.AddFlag(f)){
 							//We want to actually check this here because this may be a user error.
 							//We wont throw an runtime_error but we will display a warning to the user
 							std::cout << "WARNING: Flag " << std::string(arguments[i]) << " was previously declared, is this an error?\n";
@@ -473,11 +474,58 @@ char** GetFlags(int count, char** arguments) {
 /// BEGIN COMMAND PROCESSORS
 ///
 
+/*
+void ProcessDirectory(std::string path) {
+	std::vector<std::string> files;
+	files.clear();
+
+	std::vector<std::string> directories;
+	directories.clear();
+
+
+	if (std::filesystem::exists(path)) {
+		//if the path exists, get all files in the directory and organize by name and extension
+		//files with the same prefix will be grouped together and compiled together if possible
+		for (std::filesystem::directory_entry de : std::filesystem::directory_iterator(path)) {
+			if (de.is_directory) {
+				directories.push_back(de.path);
+			}
+			else {
+				files.push_back(de.path);
+				
+			}
+		}
+
+		//arrange and process the files in this directory
+
+		//then check if flags.HasFlag(FlagType::FT_RECURSE) and recurse into the lower directories
+	}
+	else {
+		std::cout << "Warning: Directory path " << path << " does not exist!" << std::endl;
+	}
+
+}
+
 //Command processor for the dir command
 void DoCommandDir(std::vector<std::string> args) {
 #ifdef DEBUG
 	std::cout << "Directory processing is not yet implemented!\n";
 #endif
+	bool recurse = flags.HasFlag(FlagType::FT_RECURSE);
+
+	for (std::string path : args) {
+		if (std::filesystem::exists(path)) {
+			//if the path exists, get all files in the directory and organize by name and extension
+			//files with the same prefix will be grouped together and compiled together if possible
+			for (std::filesystem::directory_entry d : std::filesystem::directory_iterator(path)) {
+				
+			}
+		}
+		else {
+			std::cout << "Warning: Directory path " << path << " does not exist!" << std::endl;
+		}
+	}
+
 }
 
 //Command processor for the file command
@@ -969,7 +1017,7 @@ struct ProcessInfo SpawnProcess(std::string command){
 	ProcessInfo p = { cmdSTD_OUT_RD, cmdProcInfo };
 	return p;
 }
-
+*/
 
 
 ///
