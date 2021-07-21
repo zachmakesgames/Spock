@@ -1,1 +1,0 @@
-Vulkan Version 1.1.130.0 is included in this folder.
