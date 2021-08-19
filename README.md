@@ -18,44 +18,33 @@ This is a personal project, so there are no hard deliverable dates for the timel
 Legend:
    @|====@ Milestone
     |--: Planning Action
-	|--+ Development Action
-	|--> Testing Action
+    |--+ Development Action
+    |--> Testing Action
  >> |  Current project state
 ```
 
 ```
-  @|====@ Iteration 2 Begins  
-   |
->> |--: Project Scope and Requirements Planning
-   |
-   |--: ShaderPack planning and assessment
-   |--+ ShaderPack initial implementation
-   |
-   |--: ColdStorage planning and assessment
-   |--+ ColdStorage initial implementation
-   |
-   |--> ColdStorage and ShaderPack testing
-   |--+ ColdStorage and ShaderPack bugfix/refactor
-   |
-  @|====@ ColdStorage and ShaderPack complete
-   |
-   |--: Spock planning and assessment
-   |--+ Spock initial implementation
-   |
-   |--+ Begin work on demo to facilitate Spock testing
-   |
-   |--> Spock initial testing
-   |--+ Spock bugfix/refactor
-   |
-  @|====@ Spock complete
-   |
-   |--: Tech demo planning and assessment
-   |
-   |--+ Tech demo initial implementation
-   |
-   |--> Tech demo testing and assessment
-   |--+ Tech demo bugfix/refactor
-   |
-  @|====@ Tech demo complete
-  @|====@ Project complete
+   @|====@ Iteration 2 Begins  
+    |
+    |--: Project Scope and Requirements Planning
+    |
+ >> |--: Spock planning and assessment
+    |--+ Spock initial implementation
+    |
+    |--+ Begin work on demo to facilitate Spock testing
+    |
+    |--> Spock initial testing
+    |--+ Spock bugfix/refactor
+    |
+   @|====@ Spock complete
+    |
+    |--: Tech demo planning and assessment
+    |
+    |--+ Tech demo initial implementation
+    |
+    |--> Tech demo testing and assessment
+    |--+ Tech demo bugfix/refactor
+    |
+   @|====@ Tech demo complete
+   @|====@ Project complete
 ```
