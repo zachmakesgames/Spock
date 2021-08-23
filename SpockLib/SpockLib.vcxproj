@@ -153,8 +153,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Buffer.h" />
+    <ClInclude Include="DescriptorSet.h" />
+    <ClInclude Include="Device.h" />
+    <ClInclude Include="Instance.h" />
+    <ClInclude Include="Pipeline.h" />
+    <ClInclude Include="VkRenderAgent.h" />
     <ClInclude Include="spock.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="View.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
