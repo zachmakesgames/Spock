@@ -5,3 +5,12 @@ Changes 8/14/2021
 ** Planning Changes
 	* Removed ShaderPack and ColdStorage from scope. Spending too much time working on those and not enough time on the graphics core. They will stay in the solution since the dependencies are already set up, but they will not be used.
 	* Revised code convention to be a little less crazy.
+	
+-----
+Changes 8/23/2021
+-----
+@@ Version: 0.0.0.0
+** Planning Changes
+	* Rearranged class responsibilities to make resizing more fluid.
+	* Fleshed out required classes, need to finalize details of those classes.
+	* Resize methodology mapped out.
