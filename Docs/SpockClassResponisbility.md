@@ -56,9 +56,11 @@ This document describes which classes are responsible for different parts of the
 * Device
 * View
 * Camera (active camera reference)
+* VkSemaphore (render finished)
+* VkSemaphore (image ready)
 
 ## VkRenderable
-* Pipline (reference)
+* Pipeline (reference)
 * DescriptorSet (reference)
 * Buffer (reference)
 
