@@ -2,6 +2,7 @@
 #include "Instance.h"
 #include <exception>
 #include <vector>
+#include <iostream>
 
 class Device {
 	public:
@@ -11,6 +12,8 @@ class Device {
 		int FindMemory(VkMemoryPropertyFlagBits memoryFlagBits, uint32_t  memoryTypeBits);
 		VkCommandBuffer* GetGfxCmdBuffers(int* outCount);
 		VkCommandBuffer* GetTransferCmdBuffer();
+		int GetGfxQueueFamilyIndex();
+		int GetTransferQueueFamilyIndex();
 
 	private:
 		Instance* instance; 
@@ -28,7 +31,9 @@ class Device {
 
 		VkCommandBufferAllocateInfo gfxBufferAllocInfo;
 		VkCommandBufferAllocateInfo transferBufferAllocInfo;
+
 		uint32_t graphicsBufferCount = 3;
 		uint32_t transferBufferCount = 1;
-		
+		uint32_t graphicsQueueFamilyIndex;
+		uint32_t transferQueueFamilyIndex;
 };

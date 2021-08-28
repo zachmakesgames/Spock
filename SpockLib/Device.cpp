@@ -70,24 +70,24 @@ Device::Device(Instance* instance) : instance(instance) {
 	//Find a queue that supports graphics
 	///TODO: Add method to find a queue that supports multiple functions
 
-	uint32_t graphics_queue_family_index = -1;
-	uint32_t transfer_queue_family_index = -1;
+	//uint32_t graphicsQueueFamilyIndex = -1;
+	//uint32_t transferQueueFamilyIndex = -1;
 	for (uint32_t i = 0; i < queue_family_property_count; ++i) {
 		if ((queue_properties_list[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) != 0) {
-			graphics_queue_family_index = i;
+			graphicsQueueFamilyIndex = i;
 		}
 		if ((queue_properties_list[i].queueFlags & VK_QUEUE_TRANSFER_BIT) != 0) {
-			transfer_queue_family_index = i;
+			transferQueueFamilyIndex = i;
 		}
 	}
 
-	if (graphics_queue_family_index < 0) {
+	if (graphicsQueueFamilyIndex < 0) {
 #ifdef DEBUG
 		std::cout << "No graphics queue found!" << std::endl;
 #endif
 		throw std::exception("No graphics queues available");
 	}
-	if (transfer_queue_family_index < 0) {
+	if (transferQueueFamilyIndex < 0) {
 #ifdef DEBUG
 		std::cout << "No transfer queue found!" << std::endl;
 #endif
@@ -106,9 +106,23 @@ Device::Device(Instance* instance) : instance(instance) {
 	this->deviceQueueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
 	this->deviceQueueCreateInfo.pNext = nullptr;
 	this->deviceQueueCreateInfo.flags = 0;
-	this->deviceQueueCreateInfo.queueFamilyIndex = graphics_queue_family_index;
+	this->deviceQueueCreateInfo.queueFamilyIndex = graphicsQueueFamilyIndex;
 	this->deviceQueueCreateInfo.queueCount = 1;
 	this->deviceQueueCreateInfo.pQueuePriorities = &queue_priority;
+
+
+
+	uint32_t property_count = 0;
+	vkEnumerateDeviceExtensionProperties(this->physDevice, NULL, &property_count, NULL);
+	std::vector<const char*> ext_names;
+	std::vector<VkExtensionProperties> ext_props(property_count);
+	vkEnumerateDeviceExtensionProperties(this->physDevice, NULL, &property_count, ext_props.data());
+	std::cout << "Enumerating supported extensions" << std::endl;
+	for (VkExtensionProperties ep : ext_props) {
+		std::cout << "Extension name: " << ep.extensionName << std::endl;
+	}
+
+
 
 	//Need this to actually set up the swap chain
 	std::vector<const char*> device_extensions = {
@@ -137,7 +151,7 @@ Device::Device(Instance* instance) : instance(instance) {
 
 	//Get the selected device queue
 	///TODO: Actually pick the right queue index
-	vkGetDeviceQueue(this->logicalDevice, graphics_queue_family_index, 0, &this->queue);
+	vkGetDeviceQueue(this->logicalDevice, graphicsQueueFamilyIndex, 0, &this->queue);
 
 	if (this->queue == nullptr) {
 #ifdef DEBUG
@@ -157,7 +171,7 @@ Device::Device(Instance* instance) : instance(instance) {
 	this->gfxPoolCreateInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
 	this->gfxPoolCreateInfo.pNext = nullptr;
 	this->gfxPoolCreateInfo.flags = VK_COMMAND_POOL_CREATE_TRANSIENT_BIT | VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
-	this->gfxPoolCreateInfo.queueFamilyIndex = graphics_queue_family_index;
+	this->gfxPoolCreateInfo.queueFamilyIndex = graphicsQueueFamilyIndex;
 
 	result = vkCreateCommandPool(this->logicalDevice, &this->gfxPoolCreateInfo, nullptr, &this->gfxCmdPool);
 	if (result != VK_SUCCESS) {
@@ -170,7 +184,8 @@ Device::Device(Instance* instance) : instance(instance) {
 	this->transferCreateInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
 	this->transferCreateInfo.pNext = nullptr;
 	this->transferCreateInfo.flags = VK_COMMAND_POOL_CREATE_TRANSIENT_BIT | VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
-	this->transferCreateInfo.queueFamilyIndex = transfer_queue_family_index;
+	//this->transferCreateInfo.queueFamilyIndex = transferQueueFamilyIndex;
+	this->transferCreateInfo.queueFamilyIndex = graphicsQueueFamilyIndex;
 
 	result = vkCreateCommandPool(this->logicalDevice, &this->transferCreateInfo, nullptr, &this->transferCmdPool);
 	if (result != VK_SUCCESS) {
@@ -253,4 +268,12 @@ VkCommandBuffer* Device::GetGfxCmdBuffers(int* outCount) {
 
 VkCommandBuffer* Device::GetTransferCmdBuffer() {
 	return this->transferCmdBuffer;
+}
+
+int Device::GetGfxQueueFamilyIndex() {
+	return this->graphicsQueueFamilyIndex;
+}
+
+int Device::GetTransferQueueFamilyIndex() {
+	return this->transferQueueFamilyIndex;
 }

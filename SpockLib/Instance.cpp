@@ -22,7 +22,7 @@ Instance::Instance(std::string instance_name) : instanceName(instance_name), ins
 	uint32_t layer_count = 0;
 	vkEnumerateInstanceLayerProperties(&layer_count, nullptr);
 	std::vector<VkLayerProperties> available_layers(layer_count);
-	std::vector<const char*> validatoin_layers = {
+	std::vector<const char*> validation_layers = {
 		"VK_LAYER_KHRONOS_validation"
 	};
 
@@ -35,11 +35,18 @@ Instance::Instance(std::string instance_name) : instanceName(instance_name), ins
 	}
 #endif
 
-
+	glfwInit();
+	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 	//Set up extensions. Only using GLFW right now
 	uint32_t glfw_extension_count = 0;
 	const char** extensions;
 	extensions = glfwGetRequiredInstanceExtensions(&glfw_extension_count);
+
+	std::cout << "glfw required extensions:" << std::endl;
+	for (uint32_t i = 0; i < glfw_extension_count; ++i) {
+		std::cout << extensions[i] << std::endl;
+	}
 
 	this->instCreateInfo.enabledExtensionCount = glfw_extension_count;
 	this->instCreateInfo.ppEnabledExtensionNames = extensions;
@@ -53,4 +60,8 @@ Instance::Instance(std::string instance_name) : instanceName(instance_name), ins
 
 VkInstance* Instance::GetInstance() {
 	return &this->instance;
+}
+
+std::string Instance::GetInstanceName() {
+	return this->instanceName;
 }
