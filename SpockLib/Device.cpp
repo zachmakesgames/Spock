@@ -28,12 +28,15 @@ Device::Device(Instance* instance) : instance(instance) {
 	for (uint32_t i = 0; i < device_count; ++i) {
 		VkPhysicalDeviceProperties device_properties = {};
 		vkGetPhysicalDeviceProperties(device_list[i], &device_properties);
+		std::cout << "Device " << i << ": " << device_properties.deviceName;
 		
 		if (device_properties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU) {
+			std::cout << " [discrete]" << std::endl;
 			discrete_device = i;
 		}
 
 		if (device_properties.deviceType == VK_PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU) {
+			std::cout << " [virtual]" << std::endl;
 			virtual_device = i;
 		}
 	}
@@ -57,7 +60,7 @@ Device::Device(Instance* instance) : instance(instance) {
 	
 	///TODO: make sure this isn't going to wipe out our device reference
 	delete[] device_list;
-
+	
 
 
 	//Set up the logical device

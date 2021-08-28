@@ -8,7 +8,7 @@ int main()
 {
     Instance test("Test instance");
     Device testDevice(&test);
-    View testView(&test, &testDevice, 100, 100);
+    View testView(&test, &testDevice, 200, 200);
 
     std::cout << "Spock test\n";
     std::string instr;

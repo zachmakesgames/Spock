@@ -24,6 +24,26 @@ View::View(Instance* instance, Device* device, int x, int y) :
 	}
 
 
+
+	//Check for surface support, vulkan will complain if we dont
+	VkBool32 supported_surface = false;
+	result = vkGetPhysicalDeviceSurfaceSupportKHR(*this->device->GetPhysDevice(), this->device->GetGfxQueueFamilyIndex(), this->windowSurface, &supported_surface);
+
+	if (result != VK_SUCCESS) {
+#ifdef DEBUG
+		std::cout << "Vulkan could not determine if surface is supported: " << result << std::endl;
+#endif
+		throw std::exception("Could not create GLFW window surface");
+	}
+
+	if (!supported_surface) {
+#ifdef DEBUG
+		std::cout << "SURFACE IS NOT SUPPORTED!!!!" << std::endl;
+#endif
+		throw std::exception("GLFW surface is not supported by this device");
+	}
+
+	
 	//Check which formats are available
 	//First find out how many there are
 	uint32_t format_count = -1;
