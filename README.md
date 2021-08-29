@@ -34,8 +34,8 @@ Legend:
     |
     |--: Project Scope and Requirements Planning
     |
- >> |--: Spock planning and assessment
-    |--+ Spock initial implementation
+    |--: Spock planning and assessment
+ >> |--+ Spock initial implementation
     |
     |--+ Begin work on demo to facilitate Spock testing
     |
