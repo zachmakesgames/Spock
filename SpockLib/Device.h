@@ -9,7 +9,7 @@ class Device {
 		Device(Instance* instance);
 		VkPhysicalDevice* GetPhysDevice();
 		VkDevice* GetLogicalDevice();
-		int FindMemory(VkMemoryPropertyFlagBits memoryFlagBits, uint32_t  memoryTypeBits);
+		int FindMemory(VkMemoryPropertyFlagBits memory_flag_bits, uint32_t  memory_type_bits);
 		VkCommandBuffer* GetGfxCmdBuffers(int* outCount);
 		VkCommandBuffer* GetTransferCmdBuffer();
 		int GetGfxQueueFamilyIndex();

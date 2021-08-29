@@ -244,16 +244,16 @@ VkDevice* Device::GetLogicalDevice() {
 	return &this->logicalDevice;
 }
 
-int Device::FindMemory(VkMemoryPropertyFlagBits memoryFlagBits, uint32_t  memoryTypeBits) {
-	VkPhysicalDeviceMemoryProperties	memoryProperties;
-	vkGetPhysicalDeviceMemoryProperties(this->physDevice, &memoryProperties);
-	for (unsigned int i = 0; i < memoryProperties.memoryTypeCount; i++)
+int Device::FindMemory(VkMemoryPropertyFlagBits memory_flag_bits, uint32_t  memory_type_bits) {
+	VkPhysicalDeviceMemoryProperties	memory_properties;
+	vkGetPhysicalDeviceMemoryProperties(this->physDevice, &memory_properties);
+	for (unsigned int i = 0; i < memory_properties.memoryTypeCount; i++)
 	{
-		VkMemoryType memType = memoryProperties.memoryTypes[i];
-		VkMemoryPropertyFlags propertyFlags = memType.propertyFlags;
-		if ((memoryTypeBits & (1 << i)) != 0)
+		VkMemoryType mem_type = memory_properties.memoryTypes[i];
+		VkMemoryPropertyFlags property_flags = mem_type.propertyFlags;
+		if ((memory_type_bits & (1 << i)) != 0)
 		{
-			if ((propertyFlags & memoryFlagBits) != 0)
+			if ((property_flags & memory_flag_bits) != 0)
 			{
 				return i;
 			}
