@@ -195,3 +195,28 @@ Pipeline::Pipeline(Instance* instance, Device* device, View* view, VkDescriptorS
 VkPipeline* Pipeline::GetVkPipeline() {
 	return &this->pipeline;
 }
+
+void Pipeline::BreakPipeline() {
+	vkDestroyPipeline(*this->device->GetLogicalDevice(), this->pipeline, nullptr);
+}
+
+void Pipeline::RebuildPipeline() {
+	//Need to redefine anything that references the view so we update the screen size
+	//Set up viewport
+	VkExtent2D surface_extent = this->view->GetExtent2D();
+
+	this->viewport.width = surface_extent.width;
+	this->viewport.height = surface_extent.height;
+
+	this->graphicsPipelineCreateInfo.renderPass = *this->view->GetRenderPass();
+
+
+	//Rebuild pipeline with new surface size
+	VkResult result = vkCreateGraphicsPipelines(*this->device->GetLogicalDevice(), VK_NULL_HANDLE, 1, &this->graphicsPipelineCreateInfo, nullptr, &this->pipeline);
+	if (result != VK_SUCCESS) {
+#ifdef DEBUG
+		std::cout << "Vulkan encountered an error creating a graphics pipeline: " << result << std::endl;
+#endif
+		throw std::exception("Could not create graphics pipeline");
+	}
+}
