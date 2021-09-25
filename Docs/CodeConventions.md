@@ -36,7 +36,7 @@ Distributing lifecycle management across systems with different policies makes i
 * Use post increment in general usage
 * \* and \& go next to the variable name instead of the type name (int32 \*my_pointer over int32\* my_pointer)
 * Use tabs instead of spaces for indentation
-* Braces go on their own line, except for linline function definitions
+* Braces go on their own line, except for one line function definitions
 * Use all uppercase for preprocessor directive (eg #ifdef DEBUG_BUILD)
 * Do not use a space to the left of assignment operators to distinguish from caomparisions (eg my_variable= 10 vs my_variable == 10)
 * Leverage pointer operators (\*/\&/\->) to advertise memory indirection instead of references
