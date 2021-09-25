@@ -7,7 +7,7 @@ Pipeline::Pipeline(Instance* instance, Device* device, View* view, VkDescriptorS
 	VkRect2D scissor_rect,
 	VkPrimitiveTopology topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST, uint32_t tesselation_patch_control_points = 0) :
 
-	instance(instance), device(device), view(view), shaderStages(shader_stages), shaderStageCount(shader_stage_count),
+	instance(instance), device(device), view(view), setLayouts(set_layouts), layoutCount(layout_count),shaderStages(shader_stages), shaderStageCount(shader_stage_count),
 	vertexInputBindings(vertex_input_bindings), vertexInputBindingCount(vertex_input_count),
 	vertexInputAttributes(vertex_input_attributes), vertexInputAttributeCount(vertex_input_count),
 	scissorRect(scissor_rect)

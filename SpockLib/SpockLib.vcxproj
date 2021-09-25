@@ -155,10 +155,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Buffer.h" />
+    <ClInclude Include="Descriptor.h" />
+    <ClInclude Include="DescriptorPool.h" />
     <ClInclude Include="DescriptorSet.h" />
     <ClInclude Include="Device.h" />
     <ClInclude Include="Instance.h" />
     <ClInclude Include="Pipeline.h" />
+    <ClInclude Include="SetLayout.h" />
     <ClInclude Include="VkRenderable.h" />
     <ClInclude Include="VkRenderAgent.h" />
     <ClInclude Include="spock.h" />
@@ -166,10 +169,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Buffer.cpp" />
+    <ClCompile Include="DescriptorPool.cpp" />
     <ClCompile Include="DescriptorSet.cpp" />
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="Instance.cpp" />
     <ClCompile Include="Pipeline.cpp" />
+    <ClCompile Include="SetLayout.cpp" />
     <ClCompile Include="Spock.cpp" />
     <ClCompile Include="View.cpp" />
     <ClCompile Include="VkRenderAgent.cpp" />
