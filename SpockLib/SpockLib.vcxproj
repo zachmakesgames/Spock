@@ -76,6 +76,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)Lib</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -154,30 +155,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Buffer.h" />
-    <ClInclude Include="Descriptor.h" />
-    <ClInclude Include="DescriptorPool.h" />
-    <ClInclude Include="DescriptorSet.h" />
-    <ClInclude Include="Device.h" />
-    <ClInclude Include="Instance.h" />
-    <ClInclude Include="Pipeline.h" />
-    <ClInclude Include="SetLayout.h" />
-    <ClInclude Include="VkRenderable.h" />
-    <ClInclude Include="VkRenderAgent.h" />
+    <ClInclude Include="c_buffer.h" />
+    <ClInclude Include="c_descriptor.h" />
+    <ClInclude Include="c_descriptor_pool.h" />
+    <ClInclude Include="c_descriptor_set.h" />
+    <ClInclude Include="c_device.h" />
+    <ClInclude Include="c_instance.h" />
+    <ClInclude Include="c_pipeline.h" />
+    <ClInclude Include="c_set_layout.h" />
+    <ClInclude Include="c_vk_renderable.h" />
+    <ClInclude Include="c_vk_render_agent.h" />
     <ClInclude Include="spock.h" />
-    <ClInclude Include="View.h" />
+    <ClInclude Include="c_view.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Buffer.cpp" />
-    <ClCompile Include="DescriptorPool.cpp" />
-    <ClCompile Include="DescriptorSet.cpp" />
-    <ClCompile Include="Device.cpp" />
-    <ClCompile Include="Instance.cpp" />
-    <ClCompile Include="Pipeline.cpp" />
-    <ClCompile Include="SetLayout.cpp" />
+    <ClCompile Include="c_buffer.cpp" />
+    <ClCompile Include="c_descriptor_pool.cpp" />
+    <ClCompile Include="c_descriptor_set.cpp" />
+    <ClCompile Include="c_device.cpp" />
+    <ClCompile Include="c_instance.cpp" />
+    <ClCompile Include="c_pipeline.cpp" />
+    <ClCompile Include="c_set_layout.cpp" />
     <ClCompile Include="Spock.cpp" />
-    <ClCompile Include="View.cpp" />
-    <ClCompile Include="VkRenderAgent.cpp" />
+    <ClCompile Include="c_view.cpp" />
+    <ClCompile Include="c_vk_render_agent.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

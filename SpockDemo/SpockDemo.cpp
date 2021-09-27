@@ -6,9 +6,9 @@
 
 int main()
 {
-    Instance test("Test instance");
-    Device testDevice(&test);
-    View testView(&test, &testDevice, 200, 200);
+    c_instance test("Test instance");
+    c_device test_device(&test);
+    c_view test_view(&test, &test_device, 200, 200);
 
     std::cout << "Spock test\n";
     std::string instr;
