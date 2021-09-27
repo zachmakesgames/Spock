@@ -10,7 +10,7 @@ c_descriptor_pool::c_descriptor_pool(c_device *device, VkDescriptorPoolSize *poo
 	this->m_pool_create_info.poolSizeCount= this->m_pool_size_count;
 	this->m_pool_create_info.pPoolSizes= this->m_pool_sizes;
 
-	VkResult result = vkCreateDescriptorPool(*this->m_device->get_logical_device(), &this->m_pool_create_info, nullptr, &this->m_descriptor_pool);
+	VkResult result= vkCreateDescriptorPool(*this->m_device->get_logical_device(), &this->m_pool_create_info, nullptr, &this->m_descriptor_pool);
 
 	if (result != VK_SUCCESS) {
 #ifdef DEBUG

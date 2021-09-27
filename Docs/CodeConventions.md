@@ -38,7 +38,7 @@ Distributing lifecycle management across systems with different policies makes i
 * Use tabs instead of spaces for indentation
 * Braces go on their own line, except for one line function definitions
 * Use all uppercase for preprocessor directive (eg #ifdef DEBUG_BUILD)
-* Do not use a space to the left of assignment operators to distinguish from caomparisions (eg my_variable= 10 vs my_variable == 10)
+* Do not use a space to the left of assignment operators to distinguish from comparisons (eg my_variable= 10 vs my_variable == 10)
 * Leverage pointer operators (\*/\&/\->) to advertise memory indirection instead of references
 * Use standardized prefixes on variables and types for quick recognition
     * c_ for class types, e_ for enums
@@ -48,7 +48,7 @@ Distributing lifecycle management across systems with different policies makes i
     * try_to_get_blank() may fail, but will do so gracefully
     * compute_blank() or query_blank() are expected to have a non-trivial cost
 * No operator overloading for non-standard functionality
-* Initialize variables at delcaration time
+* Initialize variables at declaration time
 * Follow const correctness principles for class interfaces
 * Single return statement at the bottom of a function
 * Leverage asserts to validate state

@@ -67,14 +67,14 @@ c_device::c_device(c_instance *instance) : m_instance(instance) {
 	uint32_t queue_family_property_count= 0;
 	vkGetPhysicalDeviceQueueFamilyProperties(this->m_phys_device, &queue_family_property_count, nullptr);
 
-	VkQueueFamilyProperties* queue_properties_list = new VkQueueFamilyProperties[queue_family_property_count];
+	VkQueueFamilyProperties *queue_properties_list= new VkQueueFamilyProperties[queue_family_property_count];
 	vkGetPhysicalDeviceQueueFamilyProperties(this->m_phys_device, &queue_family_property_count, queue_properties_list);
 
 	//Find a queue that supports graphics
 	///TODO: Add method to find a queue that supports multiple functions
 
-	//uint32_t graphicsQueueFamilyIndex = -1;
-	//uint32_t transferQueueFamilyIndex = -1;
+	//uint32_t graphicsQueueFamilyIndex= -1;
+	//uint32_t transferQueueFamilyIndex= -1;
 	for (uint32_t i= 0; i < queue_family_property_count; i++) {
 		if ((queue_properties_list[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) != 0) {
 			m_graphics_queue_familyindex= i;
@@ -190,7 +190,7 @@ c_device::c_device(c_instance *instance) : m_instance(instance) {
 	//this->m_transfer_pool_create_info.queueFamilyIndex= transferQueueFamilyIndex;
 	this->m_transfer_pool_create_info.queueFamilyIndex= m_graphics_queue_familyindex;
 
-	result = vkCreateCommandPool(this->m_logical_device, &this->m_transfer_pool_create_info, nullptr, &this->m_transfer_command_pool);
+	result= vkCreateCommandPool(this->m_logical_device, &this->m_transfer_pool_create_info, nullptr, &this->m_transfer_command_pool);
 	if (result != VK_SUCCESS) {
 #ifdef DEBUG
 		std::cout << "Vulkan encountered an error with vkCreateCommandPool: " << result << std::endl;
@@ -212,7 +212,7 @@ c_device::c_device(c_instance *instance) : m_instance(instance) {
 	this->m_graphics_buffer_alloc_info.level= VK_COMMAND_BUFFER_LEVEL_PRIMARY;
 	this->m_graphics_buffer_alloc_info.commandBufferCount= this->m_graphics_buffer_count;
 
-	result = vkAllocateCommandBuffers(this->m_logical_device, &this->m_graphics_buffer_alloc_info, this->m_graphics_command_buffer);
+	result= vkAllocateCommandBuffers(this->m_logical_device, &this->m_graphics_buffer_alloc_info, this->m_graphics_command_buffer);
 	if (result != VK_SUCCESS) {
 #ifdef DEBUG
 		std::cout << "Vulkan encountered an error allocating graphics buffers: " << result << std::endl;
@@ -226,7 +226,7 @@ c_device::c_device(c_instance *instance) : m_instance(instance) {
 	this->m_transfer_buffer_alloc_info.level= VK_COMMAND_BUFFER_LEVEL_PRIMARY;
 	this->m_transfer_buffer_alloc_info.commandBufferCount= this->m_transfer_buffer_count;
 
-	result = vkAllocateCommandBuffers(this->m_logical_device, &this->m_transfer_buffer_alloc_info, this->m_transfer_command_buffer);
+	result= vkAllocateCommandBuffers(this->m_logical_device, &this->m_transfer_buffer_alloc_info, this->m_transfer_command_buffer);
 	if (result != VK_SUCCESS) {
 #ifdef DEBUG
 		std::cout << "Vulkan encountered an error allocating transfer buffer: " << result << std::endl;

@@ -24,7 +24,7 @@ c_pipeline::c_pipeline(c_instance *instance, c_device *device, c_view *view, VkD
 	this->m_layout_create_info.pushConstantRangeCount= 0;	///TODO: Add option for push constants
 	this->m_layout_create_info.pPushConstantRanges= nullptr;
 
-	result = vkCreatePipelineLayout(*this->m_device->get_logical_device(), &this->m_layout_create_info, nullptr, &this->m_pipeline_layout);
+	result= vkCreatePipelineLayout(*this->m_device->get_logical_device(), &this->m_layout_create_info, nullptr, &this->m_pipeline_layout);
 
 	if (result != VK_SUCCESS) {
 #ifdef DEBUG
@@ -183,7 +183,7 @@ c_pipeline::c_pipeline(c_instance *instance, c_device *device, c_view *view, VkD
 
 
 	///TODO: Explore the creation of multiple pipelines at once
-	result = vkCreateGraphicsPipelines(*this->m_device->get_logical_device(), VK_NULL_HANDLE, 1, &this->m_graphics_pipeline_create_info, nullptr, &this->m_pipeline);
+	result= vkCreateGraphicsPipelines(*this->m_device->get_logical_device(), VK_NULL_HANDLE, 1, &this->m_graphics_pipeline_create_info, nullptr, &this->m_pipeline);
 	if (result != VK_SUCCESS) {
 #ifdef DEBUG
 		std::cout << "Vulkan encountered an error creating a graphics pipeline: " << result << std::endl;
@@ -192,7 +192,7 @@ c_pipeline::c_pipeline(c_instance *instance, c_device *device, c_view *view, VkD
 	}
 }
 
-VkPipeline* c_pipeline::get_vk_pipeline() {
+VkPipeline *c_pipeline::get_vk_pipeline() {
 	return &this->m_pipeline;
 }
 
@@ -212,7 +212,7 @@ void c_pipeline::rebuild_pipeline() {
 
 
 	//Rebuild pipeline with new surface size
-	VkResult result = vkCreateGraphicsPipelines(*this->m_device->get_logical_device(), VK_NULL_HANDLE, 1, &this->m_graphics_pipeline_create_info, nullptr, &this->m_pipeline);
+	VkResult result= vkCreateGraphicsPipelines(*this->m_device->get_logical_device(), VK_NULL_HANDLE, 1, &this->m_graphics_pipeline_create_info, nullptr, &this->m_pipeline);
 	if (result != VK_SUCCESS) {
 #ifdef DEBUG
 		std::cout << "Vulkan encountered an error creating a graphics pipeline: " << result << std::endl;

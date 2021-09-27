@@ -16,7 +16,7 @@ c_buffer::c_buffer(c_device *device, VkDeviceSize size, VkBufferUsageFlagBits us
 	this->m_buffer_create_info.sharingMode= VK_SHARING_MODE_EXCLUSIVE;	//or CONCURRENT if .queueFamilyIndexCount > 0
 
 
-	result = vkCreateBuffer(*this->m_device->get_logical_device(), &this->m_buffer_create_info, nullptr, &this->m_buffer);
+	result= vkCreateBuffer(*this->m_device->get_logical_device(), &this->m_buffer_create_info, nullptr, &this->m_buffer);
 
 	if (result != VK_SUCCESS) {
 #ifdef DEBUG
@@ -38,7 +38,7 @@ c_buffer::c_buffer(c_device *device, VkDeviceSize size, VkBufferUsageFlagBits us
 	this->m_device_memory= {};
 
 	//Allocate memory
-	result = vkAllocateMemory(*this->m_device->get_logical_device(), &this->m_alloc_info, nullptr, &this->m_device_memory);
+	result= vkAllocateMemory(*this->m_device->get_logical_device(), &this->m_alloc_info, nullptr, &this->m_device_memory);
 	if (result != VK_SUCCESS) {
 #ifdef DEBUG
 		std::cout << "Vulkan could not allocate device memory: " << result << std::endl;
@@ -48,7 +48,7 @@ c_buffer::c_buffer(c_device *device, VkDeviceSize size, VkBufferUsageFlagBits us
 
 
 	//Bind the memory
-	result = vkBindBufferMemory(*this->m_device->get_logical_device(), this->m_buffer, this->m_device_memory, 0);
+	result= vkBindBufferMemory(*this->m_device->get_logical_device(), this->m_buffer, this->m_device_memory, 0);
 	if (result != VK_SUCCESS) {
 #ifdef DEBUG
 		std::cout << "Vulkan could not bind device memory: " << result << std::endl;

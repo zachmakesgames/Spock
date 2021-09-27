@@ -44,7 +44,7 @@ c_instance::c_instance(std::string instance_name) : m_instance_name(instance_nam
 	extensions= glfwGetRequiredInstanceExtensions(&glfw_extension_count);
 
 	std::cout << "glfw required extensions:" << std::endl;
-	for (uint32_t i = 0; i < glfw_extension_count; i++) {
+	for (uint32_t i= 0; i < glfw_extension_count; i++) {
 		std::cout << extensions[i] << std::endl;
 	}
 

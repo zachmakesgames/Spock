@@ -197,7 +197,7 @@ c_view::c_view(c_instance *instance, c_device *device, int x, int y) :
 	}
 
 
-	this->m_present_images = new VkImage[this->m_present_image_count];
+	this->m_present_images= new VkImage[this->m_present_image_count];
 	result= vkGetSwapchainImagesKHR(*this->m_device->get_logical_device(), this->m_swapchain, &this->m_present_image_count, this->m_present_images);
 	if (result != VK_SUCCESS) {
 #ifdef DEBUG
@@ -274,7 +274,7 @@ c_view::c_view(c_instance *instance, c_device *device, int x, int y) :
 	//Get information about what memory requirements the depth stencil needs
 	vkGetImageMemoryRequirements(*this->m_device->get_logical_device(), this->m_depth_stencil_image, &this->m_stencil_requirements);
 
-	VkPhysicalDeviceMemoryProperties memProperties = {};	///TODO: Do this in the Device class earlier and save for later use
+	VkPhysicalDeviceMemoryProperties memProperties= {};	///TODO: Do this in the Device class earlier and save for later use
 	vkGetPhysicalDeviceMemoryProperties(*this->m_device->get_physical_device(), &memProperties);
 
 
