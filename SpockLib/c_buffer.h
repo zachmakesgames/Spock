@@ -1,4 +1,5 @@
 #pragma once
+#include "global.h"
 #include "c_device.h"
 
 class c_buffer {

@@ -106,7 +106,7 @@
       <PreprocessorDefinitions>_DEBUG;_LIB;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\Vulkan_1_2_182_0\Include\;$(SolutionDir)ThirdParty\glm;$(SolutionDir)ThirdParty\GLFW\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty\Vulkan_1_2_182_0\Include\;$(SolutionDir)ThirdParty\glm;$(SolutionDir)ThirdParty\GLFW\Include;$(SolutionDir)MaterialDescription\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>26812</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -165,6 +165,7 @@
     <ClInclude Include="c_set_layout.h" />
     <ClInclude Include="c_vk_renderable.h" />
     <ClInclude Include="c_vk_render_agent.h" />
+    <ClInclude Include="global.h" />
     <ClInclude Include="spock.h" />
     <ClInclude Include="c_view.h" />
   </ItemGroup>

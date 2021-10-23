@@ -1,4 +1,5 @@
 #pragma once
+#include "global.h"
 #include <string>
 #include <map>
 #include "c_buffer.h"

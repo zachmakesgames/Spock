@@ -1,4 +1,5 @@
 #pragma once
+#include "global.h"
 #include <vulkan/vulkan.h>
 #include <vector>
 #include <iostream>

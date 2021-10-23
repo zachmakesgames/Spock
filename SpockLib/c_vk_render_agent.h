@@ -1,4 +1,5 @@
 #pragma once
+#include "global.h"
 #include "c_pipeline.h"
 #include "c_view.h"
 #include "c_device.h"

@@ -1,4 +1,5 @@
 #pragma once
+#include "global.h"
 #include "c_device.h"
 #include "c_instance.h"
 #include "GLFW/glfw3.h"

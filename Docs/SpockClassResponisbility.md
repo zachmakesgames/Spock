@@ -3,11 +3,68 @@ This document describes which classes are responsible for different parts of the
 
 ---
 
-## Instance
+## c_instance
+* VkApplicationInfo
+* VkInstanceCreateInfo
 * VkInstance
 
-## Device
-* Instance (reference)
+## c_device
+* VkPhysicalDevice
+* VkDeviceQueueCreateInfo
+* VkLayerProperties
+* VkDeviceCreateInfo
+* VkLogicalDevice
+* VkQueue
+
+## c_view
+* VkSurfaceCapabilitiesKHR
+* VkSurfaceKHR
+* VkExtent2D
+* VkSurfaceFormatKHR
+* VkPresentModeKHR
+* VkSwapchainCreateInfoKHR
+* VkImage
+* VkImageView
+* VkImageViewCreateInfo
+
+
+## c_buffer
+* VkBufferCreateInfo
+* VkBufferUsageFlags
+* VkSharingMode
+* VkDataBuffer
+* VkMemoryAllocateInfo
+* VkDeviceMemory
+
+## c_image_sampler
+* VkSamplerCreateInfo
+* VkSampler
+
+## c_image_buffer
+* VkDeviceSize
+* VkImage
+* VkImageCreateInfo
+* VkMemoryAllocateInfo
+* VkDeviceMemory
+* VkImageSubresource
+* VkSubresourceLayout
+
+
+
+
+
+
+
+
+---
+Old stuff below, new stuff above
+---
+
+## c_instance
+* VkInstance
+
+## c_device
+* c_instance (reference)
 * VkDevice
 * VkPhysicalDevice
 * VkQueue
@@ -16,8 +73,8 @@ This document describes which classes are responsible for different parts of the
 * VkCommandBuffer (Graphics)
 * VkCommandBuffer (Transfer)
 
-## View
-* Device (reference)
+## c_view
+* c_device (reference)
 * VkExtent2D
 * VkSurfaceKHR
 * GLFWwindow
@@ -30,43 +87,43 @@ This document describes which classes are responsible for different parts of the
 * VkImageView (Framebuffer attachments)
 * VkFrameBuffer* (Frame buffers)
 
-## Pipeline
-* Device (reference)
-* View (reference)
+## c_pipeline
+* c_device (reference)
+* c_view (reference)
 * VkPipelineLayout
 * VkViewport
 * VkRect2D (Scissor rect)
 * VkPipeline
 
-## DescriptorSet
-* Device (reference)
+## c_descriptor_set
+* c_device (reference)
 * VkDescriptorSetLayout
 * VkDescriptorSet
 * VkDescriptorBufferInfo (Not needed?)
 * VkWriteDescriptorSet (Not needed?)
 
-## Buffer
-* Device (reference)
+## c_buffer
+* c_device (reference)
 * VkBuffer
 * VkDeviceMemory
 * VkDeviceSize
 
-## VkRenderAgent
-* Instance
-* Device
-* View
-* Camera (active camera reference)
+## c_kk_render_agent
+* c_instance
+* c_device
+* c_view
+* c_camera (active camera reference)
 * VkSemaphore (render finished)
 * VkSemaphore (image ready)
 
-## VkRenderable
-* Pipeline (reference)
-* DescriptorSet (reference)
-* Buffer (reference)
+## c_vk_renderable
+* c_ipeline (reference)
+* c_descriptor_set (reference)
+* c_buffer (reference)
 
-## Camera
-* DescriptorSet
-* Buffer
+## c_camera
+* c_descriptor_set
+* c_buffer
 * glm::mat4 (view matrix)
 * glm::mat4 (projection matrix)
 * float (near clip plain)

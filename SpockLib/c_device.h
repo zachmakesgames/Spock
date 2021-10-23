@@ -1,4 +1,5 @@
 #pragma once
+#include "global.h"
 #include "c_instance.h"
 #include <exception>
 #include <vector>

@@ -2,9 +2,14 @@
 //
 
 #include <iostream>
+#include "c_material_description.h"
+
+class c_material_description_factory {
+};
 
 int main()
 {
     std::cout << "Hello World!\n";
+
 }
 
